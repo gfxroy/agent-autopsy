@@ -66,7 +66,7 @@ with tempfile.TemporaryDirectory() as tmp, sync_playwright() as p:
     # Static screenshots (fresh profile, then toasts hidden for clean shots)
     ctx = browser.new_context(viewport={"width": 1440, "height": 900})
     page = ctx.new_page()
-    hide = "document.querySelectorAll('[aria-live]').forEach(e => e.style.display='none')"
+    hide = "document.querySelectorAll('[aria-live], body > canvas[aria-hidden]').forEach(e => e.style.display='none')"
 
     def snap(hash_: str, name: str, wait: int = 4500, before=None):
         page.goto(BASE + "#" + hash_)
@@ -99,6 +99,7 @@ with tempfile.TemporaryDirectory() as tmp, sync_playwright() as p:
     page.wait_for_timeout(6500)
     page.click('[data-testid="open-certificate"]')
     page.wait_for_timeout(1200)
+    page.evaluate(hide)
     page.locator('[data-testid="certificate"]').screenshot(path=str(DOCS / "certificate.png"))
     browser.close()
 print("screenshots written to", DOCS)

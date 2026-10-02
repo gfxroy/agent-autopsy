@@ -159,13 +159,13 @@ export const useStore = create<State>()(
       applyProgress(tx) {
         set({ progress: tx.p })
         for (const e of tx.events) {
-          if (e.type === 'xp')
+          if (e.type === 'xp' && !e.reason.startsWith('Badge:'))
             get().toast({ icon: '✨', title: `+${e.amount} XP`, body: e.reason, tone: 'xp' })
           if (e.type === 'badge') {
             get().toast({
               icon: e.badge.icon,
               title: `Badge unlocked: ${e.badge.name}`,
-              body: e.badge.desc,
+              body: `${e.badge.desc} · +150 XP`,
               tone: 'badge',
             })
             sfx.badge()
