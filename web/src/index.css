@@ -1,0 +1,144 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink-950: #07080c;
+  --color-ink-900: #0b0c12;
+  --color-ink-850: #0f1118;
+  --color-ink-800: #141720;
+  --color-ink-700: #1d212d;
+  --color-ink-600: #2a2f3e;
+  --color-ink-500: #3a4154;
+  --color-k-llm: #a78bfa;
+  --color-k-tool: #22d3ee;
+  --color-k-agent: #94a3b8;
+  --color-k-handoff: #fbbf24;
+  --color-k-retrieval: #34d399;
+  --color-k-guardrail: #f472b6;
+  --color-k-other: #64748b;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --animate-fade-in: fade-in 0.3s ease-out both;
+  --animate-pop: pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+  --animate-slam: slam 0.55s cubic-bezier(0.2, 0.9, 0.25, 1.2) both;
+  --animate-shake: shake 0.45s ease-in-out both;
+  --animate-pulse-red: pulse-red 1.6s ease-in-out infinite;
+  --animate-slide-in: slide-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes slam {
+    0% {
+      opacity: 0;
+      transform: scale(2.6) rotate(-14deg);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(0.92) rotate(-8deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(-8deg);
+    }
+  }
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-6px);
+    }
+    40% {
+      transform: translateX(6px);
+    }
+    60% {
+      transform: translateX(-4px);
+    }
+    80% {
+      transform: translateX(4px);
+    }
+  }
+  @keyframes pulse-red {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.45);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(244, 63, 94, 0);
+    }
+  }
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  @apply bg-ink-950 text-slate-200 antialiased;
+  background:
+    radial-gradient(1100px 520px at 0% -10%, rgba(244, 63, 94, 0.09), transparent 60%),
+    radial-gradient(900px 500px at 110% 0%, rgba(34, 211, 238, 0.07), transparent 60%),
+    var(--color-ink-950);
+}
+::selection {
+  background: rgba(244, 63, 94, 0.35);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2f3e transparent;
+}
+
+@utility panel {
+  @apply rounded-xl border border-white/[0.06] bg-ink-900/85 shadow-[0_0_0_1px_rgba(0,0,0,0.4),0_20px_50px_-24px_rgba(0,0,0,0.9)] backdrop-blur;
+}
+@utility panel-title {
+  @apply text-[11px] font-semibold tracking-[0.14em] text-slate-400 uppercase;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-150 select-none disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-gradient-to-r from-rose-500 to-fuchsia-600 text-white shadow-lg shadow-rose-950/40 hover:brightness-110 active:scale-[0.97];
+}
+@utility btn-ghost {
+  @apply btn border border-white/[0.08] bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.07] hover:text-white active:scale-[0.97];
+}
+@utility chip {
+  @apply inline-flex items-center gap-1 rounded-md border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 font-mono text-[11px] text-slate-300;
+}
+@utility kbd {
+  @apply inline-flex min-w-[1.4em] items-center justify-center rounded border border-white/15 bg-white/[0.06] px-1 font-mono text-[10px] text-slate-300;
+}
+@utility code-block {
+  @apply max-h-80 overflow-auto rounded-lg border border-white/[0.06] bg-ink-950/80 p-2.5 font-mono text-[11.5px] leading-relaxed break-words whitespace-pre-wrap text-slate-300;
+}

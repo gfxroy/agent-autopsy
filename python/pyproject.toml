@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-autopsy"
+version = "0.1.0"
+description = "Record AI agent runs as OpenTelemetry-GenAI-style JSONL that Agent Autopsy can diagnose in the browser."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Aaditya Roy" }]
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["llm", "agents", "observability", "tracing", "opentelemetry", "debugging"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Debuggers",
+]
+
+[project.urls]
+Homepage = "https://gfxroy.github.io/agent-autopsy/"
+Repository = "https://github.com/gfxroy/agent-autopsy"
+
+[project.scripts]
+agent-autopsy = "agent_autopsy.__main__:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_autopsy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

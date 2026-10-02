@@ -1,0 +1,253 @@
+[
+ {
+  "started_at": "2026-10-01T07:15:00.000Z",
+  "latency_ms": 1180,
+  "request": {
+   "model": "gpt-4o-mini",
+   "messages": [
+    {
+     "role": "system",
+     "content": "You are a concise travel assistant. Today is 2026-10-01 (Thursday)."
+    },
+    {
+     "role": "user",
+     "content": "What's the weather in Lisbon tomorrow, and is there a direct flight from Berlin to Lisbon on Friday under €150?"
+    }
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_weather",
+      "description": "Daily forecast for a city.",
+      "strict": true,
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "city": {
+         "type": "string"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "city",
+        "date"
+       ],
+       "additionalProperties": false
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search direct flights.",
+      "strict": true,
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string"
+        },
+        "destination": {
+         "type": "string"
+        },
+        "date": {
+         "type": "string"
+        },
+        "max_price_eur": {
+         "type": "number"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date",
+        "max_price_eur"
+       ],
+       "additionalProperties": false
+      }
+     }
+    }
+   ],
+   "parallel_tool_calls": true
+  },
+  "response": {
+   "id": "chatcmpl-AbC1",
+   "object": "chat.completion",
+   "created": 1790838900,
+   "model": "gpt-4o-mini-2024-07-18",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+       {
+        "id": "call_Wx81",
+        "type": "function",
+        "function": {
+         "name": "get_weather",
+         "arguments": "{\"city\":\"Lisbon\",\"date\":\"2026-10-02\"}"
+        }
+       },
+       {
+        "id": "call_Fl22",
+        "type": "function",
+        "function": {
+         "name": "search_flights",
+         "arguments": "{\"origin\":\"BER\",\"destination\":\"LIS\",\"date\":\"2026-10-02\",\"max_price_eur\":150}"
+        }
+       }
+      ]
+     },
+     "finish_reason": "tool_calls"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 214,
+    "completion_tokens": 61,
+    "total_tokens": 275,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   }
+  }
+ },
+ {
+  "started_at": "2026-10-01T07:15:02.020Z",
+  "latency_ms": 1640,
+  "request": {
+   "model": "gpt-4o-mini",
+   "messages": [
+    {
+     "role": "system",
+     "content": "You are a concise travel assistant. Today is 2026-10-01 (Thursday)."
+    },
+    {
+     "role": "user",
+     "content": "What's the weather in Lisbon tomorrow, and is there a direct flight from Berlin to Lisbon on Friday under €150?"
+    },
+    {
+     "role": "assistant",
+     "content": null,
+     "tool_calls": [
+      {
+       "id": "call_Wx81",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\":\"Lisbon\",\"date\":\"2026-10-02\"}"
+       }
+      },
+      {
+       "id": "call_Fl22",
+       "type": "function",
+       "function": {
+        "name": "search_flights",
+        "arguments": "{\"origin\":\"BER\",\"destination\":\"LIS\",\"date\":\"2026-10-02\",\"max_price_eur\":150}"
+       }
+      }
+     ]
+    },
+    {
+     "role": "tool",
+     "tool_call_id": "call_Wx81",
+     "content": "{\"city\":\"Lisbon\",\"date\":\"2026-10-02\",\"high_c\":24,\"low_c\":16,\"conditions\":\"sunny\",\"rain_pct\":5}"
+    },
+    {
+     "role": "tool",
+     "tool_call_id": "call_Fl22",
+     "content": "{\"flights\":[{\"flight\":\"TP 537\",\"dep\":\"10:05\",\"arr\":\"12:35\",\"price_eur\":118},{\"flight\":\"FR 1903\",\"dep\":\"06:40\",\"arr\":\"09:10\",\"price_eur\":74}]}"
+    }
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_weather",
+      "description": "Daily forecast for a city.",
+      "strict": true,
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "city": {
+         "type": "string"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "city",
+        "date"
+       ],
+       "additionalProperties": false
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search direct flights.",
+      "strict": true,
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string"
+        },
+        "destination": {
+         "type": "string"
+        },
+        "date": {
+         "type": "string"
+        },
+        "max_price_eur": {
+         "type": "number"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date",
+        "max_price_eur"
+       ],
+       "additionalProperties": false
+      }
+     }
+    }
+   ]
+  },
+  "response": {
+   "id": "chatcmpl-AbC2",
+   "object": "chat.completion",
+   "created": 1790838902,
+   "model": "gpt-4o-mini-2024-07-18",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "**Lisbon tomorrow (Fri 2 Oct):** sunny, 16–24 °C, 5% chance of rain.\n\n**Direct BER → LIS on Friday under €150:**\n- FR 1903 06:40 → 09:10 — €74\n- TP 537 10:05 → 12:35 — €118\n\nWant me to hold one of these?"
+     },
+     "finish_reason": "stop"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 352,
+    "completion_tokens": 88,
+    "total_tokens": 440,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   }
+  }
+ }
+]
