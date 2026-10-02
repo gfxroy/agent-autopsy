@@ -26,7 +26,7 @@ export function closest(name: string, options: string[]): string | undefined {
     }
   }
   // Only suggest names that are plausibly a typo / paraphrase of a real tool.
-  return best !== undefined && bestD <= Math.max(3, Math.ceil(name.length * 0.5)) ? best : undefined
+  return best !== undefined && bestD <= Math.max(2, Math.floor(name.length / 4)) ? best : undefined
 }
 
 const isHandoff = (name: string) => /^transfer_to_/i.test(name)

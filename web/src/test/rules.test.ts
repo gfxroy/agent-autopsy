@@ -141,7 +141,8 @@ describe('unknown-tool', () => {
   })
   it('levenshtein / closest helpers', () => {
     expect(levenshtein('kitten', 'sitting')).toBe(3)
-    expect(closest('serch_web', ['web_search', 'fetch_url'])).toBeDefined()
+    expect(closest('web_serch', ['web_search', 'fetch_url'])).toBe('web_search')
+    expect(closest('git_diff', ['list_dir', 'read_file'])).toBeUndefined()
     expect(closest('zzzzzzzzzzzz', ['a'])).toBeUndefined()
   })
 })

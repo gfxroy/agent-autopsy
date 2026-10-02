@@ -2,12 +2,16 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import { analyze, loadTrace } from './engine'
-import { buildLevel, CAMPAIGN, dailyPuzzle } from './game/levels'
+import { plainReport } from './lib/plain'
 import './index.css'
 
-// Small console API for power users and end-to-end tests: `agentAutopsy.analyze(agentAutopsy.loadTrace(text))`.
+// Console API for power users: `agentAutopsy.report(text)`.
 Object.assign(window, {
-  agentAutopsy: { loadTrace, analyze, buildLevel, dailyPuzzle, campaign: CAMPAIGN },
+  agentAutopsy: {
+    loadTrace,
+    analyze,
+    report: (text: string) => plainReport(analyze(loadTrace(text))),
+  },
 })
 
 createRoot(document.getElementById('root')!).render(
